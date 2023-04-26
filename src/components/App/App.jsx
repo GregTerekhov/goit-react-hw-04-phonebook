@@ -16,8 +16,6 @@ export const App = () => {
   const [contacts, setContacts] = useState(initialState);
   const [filter, setFilter] = useState('');
 
-  console.log(contacts.id);
-
   useEffect(() => {
     const savedContacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(savedContacts);
@@ -38,7 +36,7 @@ export const App = () => {
   };
 
   const formSubmitHandler = contact => {
-    const isExist = contacts.some(
+    const isExist = initialState.some(
       ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
     );
 
@@ -55,7 +53,7 @@ export const App = () => {
 
   const getFilteredContacts = () => {
     const normalizedFilter = filter.toLowerCase();
-    return initialState.filter(contact =>
+    return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
