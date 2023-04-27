@@ -24,7 +24,7 @@ export const App = () => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
     }
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    localStorage.setItem('contacts', JSON.stringify(contacts) ?? initialState);
   }, [isFirstRender, contacts]);
 
   const deleteContact = contactId => {
