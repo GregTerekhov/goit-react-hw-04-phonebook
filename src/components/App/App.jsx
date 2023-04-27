@@ -32,7 +32,7 @@ export const App = () => {
       isFirstRender.current = false;
     }
     localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  }, [isFirstRender, contacts]);
 
   const deleteContact = contactId => {
     setContacts(prevState =>
