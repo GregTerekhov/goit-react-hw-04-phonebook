@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
@@ -13,19 +13,12 @@ const initialState = [
 ];
 
 export const App = () => {
-  const [contacts, setContacts] = useState(initialState);
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) ?? initialState
+  );
   const [filter, setFilter] = useState('');
 
   const isFirstRender = useRef(true);
-
-  useEffect(() => {
-    const savedContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(savedContacts);
-
-    if (parsedContacts) {
-      setContacts(parsedContacts);
-    }
-  }, []);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -41,7 +34,7 @@ export const App = () => {
   };
 
   const formSubmitHandler = contact => {
-    const isExist = initialState.some(
+    const isExist = contacts.some(
       ({ name }) => name.toLowerCase() === contact.name.toLowerCase()
     );
 
