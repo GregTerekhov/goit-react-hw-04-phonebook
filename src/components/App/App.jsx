@@ -45,9 +45,7 @@ export const App = () => {
     setContacts(prevState => [...prevState, { id: nanoid(), ...contact }]);
   };
 
-  const changeFilter = event => {
-    setFilter(event.currentTarget.value);
-  };
+  const changeFilter = event => setFilter(event.currentTarget.value);
 
   const getFilteredContacts = () => {
     const normalizedFilter = filter.toLowerCase();
